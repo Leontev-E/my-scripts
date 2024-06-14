@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function processInput(phone) {
     var iti = window.intlTelInput(phone, {
         allowDropdown: true,
-        initialCountry: 'MX',
+        initialCountry: '{country_code}',
         nationalMode: true,
         autoPlaceholder: 'aggressive',
         formatOnDisplay: true,
