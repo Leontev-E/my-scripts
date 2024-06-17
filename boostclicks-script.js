@@ -80,3 +80,5 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+document.oncontextmenu = cmenu; function cmenu() { return false; };
