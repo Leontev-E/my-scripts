@@ -1,10 +1,10 @@
-//Универсальная маска, данные о гео берем в input type="hidden" name="country"
+// Универсальная маска, данные о гео берем в input type="hidden" name="country"
 const style = document.createElement('style');
 style.textContent = `
-        .iti__flag-container {
-            display: none;
-        }
-        `;
+    .iti__flag-container {
+        display: none;
+    }
+`;
 document.head.append(style);
 
 const scriptJQuery = document.createElement('script');
@@ -23,7 +23,7 @@ scriptJQuery.onload = function () {
         window.addEventListener('load', () => {
             // Получаем значение страны из скрытого инпута
             var countryInput = document.querySelector('input[name=country]');
-            var countryCode = countryInput ? countryInput.value : null;
+            var countryCode = countryInput ? countryInput.value : '{country_code}';
 
             var phones = document.querySelectorAll('input[name=phone]');
             phones.forEach(phone => {
@@ -38,12 +38,9 @@ scriptJQuery.onload = function () {
                 autoPlaceholder: 'aggressive',
                 formatOnDisplay: true,
                 separateDialCode: true,
-                utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/19.2.16/js/utils.js'
+                utilsScript: 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/19.2.16/js/utils.js',
+                initialCountry: countryCode
             };
-
-            if (countryCode) {
-                itiOptions.initialCountry = countryCode;
-            }
 
             var iti = window.intlTelInput(phone, itiOptions);
 
@@ -75,7 +72,8 @@ scriptJQuery.onload = function () {
     };
 };
 
-//запрещаем более 2х лидов 1 юзеру в сутки
+
+//запрещаем более 3х лидов 1 юзеру в сутки
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.querySelector("form");
 
@@ -86,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const filteredLogs = requestLogs.filter(log => (now - log.timestamp) < 24 * 60 * 60 * 1000);
 
-        if (filteredLogs.length >= 2) {
+        if (filteredLogs.length >= 3) {
             window.location.href = 'error.php';
         } else {
             filteredLogs.push({ timestamp: now });
@@ -98,3 +96,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //отключаем правую кнопку мыши
 document.oncontextmenu = cmenu; function cmenu() { return false; };
+
+/* Разработчик: https://t.me/boostclicks | Сайт: https://boostclicks.ru */
